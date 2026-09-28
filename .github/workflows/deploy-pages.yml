@@ -15,6 +15,7 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment: github-pages
     env:
       VITE_AVAILABILITY_ENDPOINT: ${{ vars.VITE_AVAILABILITY_ENDPOINT }}
     steps:

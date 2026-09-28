@@ -19,7 +19,7 @@ The workflow in `.github/workflows/deploy-pages.yml` builds and deploys the site
 
 1. Create a GitHub repository for the site and push this project to its `main` branch.
 2. In the repository, open **Settings → Pages** and set the build/deployment source to **GitHub Actions**.
-3. If using live Google Calendar availability, add a repository Actions variable named `VITE_AVAILABILITY_ENDPOINT` containing the Apps Script `/exec` URL. The endpoint URL is public; calendar IDs remain in Apps Script. If unset, the site builds but reports availability as unconfigured.
+3. If using live Google Calendar availability, add an Actions variable named `VITE_AVAILABILITY_ENDPOINT` containing the Apps Script `/exec` URL. Add it either under repository **Settings → Secrets and variables → Actions → Variables** or the `github-pages` environment’s variables. The endpoint URL is public; calendar IDs remain in Apps Script. If unset, the site builds but reports availability as unconfigured.
 4. Push to `main` or manually run **Deploy to GitHub Pages** from the Actions tab. The workflow detects the repository name and sets Vite's base path automatically, including root deployment for an `owner.github.io` repository.
 
 For a project repository, the default site address is `https://OWNER.github.io/REPOSITORY/`. Configure a custom domain in **Settings → Pages** if desired.
