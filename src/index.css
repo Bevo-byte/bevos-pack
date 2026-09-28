@@ -1,0 +1,29 @@
+:root {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  color: #2B2320;
+  background: #F6EFE3;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  --pine: #1F3A2E;
+  --amber: #E8A33D;
+  --clay: #B5563A;
+  --clay-ink: #903F2C;
+  --muted-ink: #5F554D;
+  --sand: #F6EFE3;
+  --charcoal: #2B2320;
+  --sage: #A9BBA0;
+  --serif: 'Fraunces', Georgia, serif;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { min-width: 320px; margin: 0; }
+button, input, textarea { font: inherit; }
+button, a { -webkit-tap-highlight-color: transparent; }
+a { color: inherit; }
+img { display: block; max-width: 100%; }
+:focus-visible { outline: 3px solid var(--clay); outline-offset: 4px; }
+#root { min-height: 100svh; }
