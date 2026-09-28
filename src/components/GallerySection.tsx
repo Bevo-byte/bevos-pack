@@ -1,8 +1,13 @@
+import beachWalk from '../assets/IMG_7845.jpg'
+import shelterDogWalk from '../assets/IMG_5410.jpg'
+import happyDog from '../assets/IMG_5432.jpg'
+import curiousDog from '../assets/IMG_5434.jpg'
+
 const photos = [
-  { src: 'src/assets/IMG_7845.jpg', alt: 'A happy dog enjoying the beach view', caption: 'Exploring new beaches with one of my favs!' },
-  { src: 'src/assets/IMG_5410.jpg', alt: 'A husky rolling on its back', caption: 'Shelter dog walks' },
-  { src: 'src/assets/IMG_5432.jpg', alt: 'A happy dog looking toward the camera with bright eyes', caption: 'Shelter dog walks' },
-  { src: 'src/assets/IMG_5434.jpg', alt: 'A curious dog with floppy ears', caption: 'Shelter dog walks' },
+  { src: beachWalk, alt: 'A happy dog enjoying the beach view', caption: 'Exploring new beaches with one of my favs!' },
+  { src: shelterDogWalk, alt: 'A husky rolling on its back', caption: 'Shelter dog walks' },
+  { src: happyDog, alt: 'A happy dog looking toward the camera with bright eyes', caption: 'Shelter dog walks' },
+  { src: curiousDog, alt: 'A curious dog with floppy ears', caption: 'Shelter dog walks' },
 ]
 
 function GallerySection() {

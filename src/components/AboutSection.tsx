@@ -1,11 +1,12 @@
 import { ArrowRight, PawPrint, ShieldCheck } from 'lucide-react'
+import jasonAndFlynn from '../assets/jasonFlynn.jpg'
 
 function AboutSection() {
   return (
     <section className="about-section section" id="about" aria-labelledby="about-title">
       <div className="about-photo-wrap">
         <div className="about-photo-frame">
-          <img src="src/assets/jasonFlynn.jpg" alt="A golden retriever enjoying a sunny day outdoors" loading="lazy" />
+          <img src={jasonAndFlynn} alt="Jason and Flynn lying in the grass together" loading="lazy" />
           <div className="photo-caption"><PawPrint size={17} /><span>My best mate<br />and I</span></div>
         </div>
         <p className="about-insured"><ShieldCheck size={20} aria-hidden="true" /><strong>Insured</strong></p>
