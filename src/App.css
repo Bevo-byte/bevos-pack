@@ -74,6 +74,14 @@ h2 em { color: var(--clay-ink); }
 .text-link { margin-top: 23px; display: inline-flex; align-items: center; gap: 11px; color: var(--clay-ink); font-size: 16px; font-weight: 700; text-decoration: none; }
 .text-link:hover { text-decoration: underline; text-underline-offset: 4px; }
 
+.cancellation-section { display: grid; grid-template-columns: .8fr 1.2fr; align-items: center; gap: clamp(40px, 8vw, 112px); background: #E8DCC8; }
+.cancellation-heading h2 { font-size: clamp(44px, 5vw, 64px); }
+.cancellation-heading h2 em { color: var(--clay-ink); }
+.cancellation-terms { border-top: 1px solid rgba(43,35,32,.25); }
+.cancellation-term { min-height: 86px; display: flex; align-items: center; justify-content: space-between; gap: 20px; border-bottom: 1px solid rgba(43,35,32,.25); }
+.cancellation-term span { color: var(--muted-ink); font-size: 16px; }
+.cancellation-term strong { color: var(--pine); font-family: var(--serif); font-size: 22px; font-weight: 500; text-align: right; }
+
 .about-section { display: grid; grid-template-columns: 1fr .92fr; align-items: center; gap: clamp(55px, 10vw, 145px); }
 .about-photo-frame { position: relative; }
 .about-photo-frame > img { width: 100%; object-fit: cover; }
@@ -246,6 +254,7 @@ h2 em { color: var(--clay-ink); }
   .section { padding: 86px 7%; }
   .rates-copy { padding: 72px 8%; }
   .rates-photo { min-height: 650px; }
+  .cancellation-section { grid-template-columns: 1fr; gap: 32px; }
   .availability-section { padding: 82px 7%; }
   .booking-panel { grid-template-columns: 1fr; }
   .booking-summary { padding: 27px 38px; }

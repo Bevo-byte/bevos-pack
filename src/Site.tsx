@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import AboutSection from './components/AboutSection'
 import AvailabilitySection from './components/AvailabilitySection'
+import CancellationPolicySection from './components/CancellationPolicySection'
 import ContactSection from './components/ContactSection'
 import Footer from './components/Footer'
 import GallerySection from './components/GallerySection'
@@ -30,6 +31,7 @@ function Site() {
         <IntroBand />
         <ServicesSection />
         <RatesSection />
+        <CancellationPolicySection />
         <AboutSection />
         <AvailabilitySection onRequest={handleWalkRequest} />
         <GallerySection />

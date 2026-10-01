@@ -32,6 +32,39 @@ function initializeCalendarConfig() {
   return `Calendar configuration saved from ${spreadsheet.getName()}.`
 }
 
+// Run this from the Apps Script editor to identify calendars the script cannot read.
+function testCalendarConfig() {
+  const calendarIds = getCalendarIdsFromConfigSheet_()
+  if (calendarIds.length === 0) {
+    throw new Error(`No calendar IDs found in ${CONFIG_SHEET_NAME}, column A starting at row 2.`)
+  }
+
+  const results = calendarIds.map((calendarId) => {
+    try {
+      const calendar = CalendarApp.getCalendarById(calendarId)
+      if (!calendar) {
+        return { calendarId, ok: false, issue: 'CalendarApp could not find or access this calendar.' }
+      }
+
+      const rangeStart = new Date()
+      const rangeEnd = new Date(rangeStart.getTime() + BOOKING_WINDOW_DAYS * 24 * 60 * 60 * 1000)
+      const events = calendar.getEvents(rangeStart, rangeEnd).map((event) => ({
+        start: event.getStartTime(),
+        end: event.getEndTime(),
+        allDay: event.isAllDayEvent(),
+        transparency: String(event.getTransparency()),
+        ignoredAsFree: isTransparentEvent_(event),
+      }))
+      return { calendarId, ok: true, name: calendar.getName(), events }
+    } catch (error) {
+      return { calendarId, ok: false, issue: String(error && error.message ? error.message : error) }
+    }
+  })
+
+  console.log(JSON.stringify(results, null, 2))
+  return results
+}
+
 function doGet(event) {
   const callback = event && event.parameter ? event.parameter.callback : ''
   let payload
@@ -43,7 +76,7 @@ function doGet(event) {
       slots: getAvailableSlots_(),
     }
   } catch (error) {
-    console.error(error)
+    console.error(`Availability request failed: ${error && error.stack ? error.stack : error}`)
     payload = {
       success: false,
       message: 'Availability is temporarily unavailable.',
@@ -75,18 +108,25 @@ function getAvailableSlots_() {
 
   const busyIntervals = []
   calendarIds.forEach((calendarId) => {
-    const calendar = CalendarApp.getCalendarById(calendarId)
-    if (!calendar) {
-      throw new Error(`Unable to access configured calendar: ${calendarId}`)
-    }
-    calendar.getEvents(rangeStart, rangeEnd).forEach((event) => {
-      const eventEnd = event.getEndTime()
-      const eventStart = event.getStartTime()
-      const bufferedStart = new Date(eventStart.getTime() - BOOKING_BUFFER_MINUTES * 60 * 1000)
-      const bufferedEnd = new Date(eventEnd.getTime() + BOOKING_BUFFER_MINUTES * 60 * 1000)
+    try {
+      const calendar = CalendarApp.getCalendarById(calendarId)
+      if (!calendar) {
+        throw new Error('CalendarApp could not find or access this calendar.')
+      }
 
-      busyIntervals.push({ start: bufferedStart, end: bufferedEnd })
-    })
+      calendar.getEvents(rangeStart, rangeEnd).forEach((event) => {
+        if (isTransparentEvent_(event)) return
+
+        const eventEnd = event.getEndTime()
+        const eventStart = event.getStartTime()
+        const bufferedStart = new Date(eventStart.getTime() - BOOKING_BUFFER_MINUTES * 60 * 1000)
+        const bufferedEnd = new Date(eventEnd.getTime() + BOOKING_BUFFER_MINUTES * 60 * 1000)
+
+        busyIntervals.push({ start: bufferedStart, end: bufferedEnd })
+      })
+    } catch (error) {
+      throw new Error(`Unable to read a configured calendar (${calendarId}): ${error && error.message ? error.message : error}`)
+    }
   })
 
   return generateSlotsFromTemplate_(rangeStart, rangeEnd)
@@ -99,6 +139,10 @@ function getAvailableSlots_() {
       }),
     }))
     .filter((slot) => slot.durations.length > 0)
+}
+
+function isTransparentEvent_(event) {
+  return String(event.getTransparency()).toUpperCase() === 'TRANSPARENT'
 }
 
 function generateSlotsFromTemplate_(rangeStart, rangeEnd) {
