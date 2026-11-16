@@ -11,6 +11,7 @@ import IntroBand from './components/IntroBand'
 import RatesSection from './components/RatesSection'
 import ReviewsSection from './components/ReviewsSection'
 import ServicesSection from './components/ServicesSection'
+import TrainingAppSection from './components/TrainingAppSection'
 import type { WalkRequest } from './types'
 import './App.css'
 
@@ -30,6 +31,7 @@ function Site() {
         <Hero />
         <IntroBand />
         <ServicesSection />
+        <TrainingAppSection />
         <RatesSection />
         <CancellationPolicySection />
         <AboutSection />

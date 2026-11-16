@@ -19,6 +19,7 @@ function Header() {
       </button>
       <nav className={menuOpen ? 'main-nav is-open' : 'main-nav'} aria-label="Main navigation">
         <a href="#services" onClick={closeMenu}>Services</a>
+        <a href="#training" onClick={closeMenu}>Training app</a>
         <a href="#rates" onClick={closeMenu}>Rates</a>
         <a href="#about" onClick={closeMenu}>About</a>
         <a href="#reviews" onClick={closeMenu}>Reviews</a>
