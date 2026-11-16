@@ -6,10 +6,10 @@ const reviews = [
     serviceType: 'Dog walking',
   },
   {
-    title: 'A kind word about dog sitting',
-    description: 'Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Donec sed odio dui.',
-    name: 'Client name',
-    serviceType: 'Dog sitting',
+    title: 'A kind word about dog walking',
+    description: 'Jason is extremely reliable, responsible, personable, and terrific with my feisty dog. I\'m very appreciative of his care. I highly recommend Jason!',
+    name: 'Angela S',
+    serviceType: 'Dog walking',
   },
 ]
 
